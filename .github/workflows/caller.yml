@@ -1,0 +1,9 @@
+name: Caller Workflow
+
+on:
+  push:
+    branches: [ main ]   # run only when pushing to main
+
+jobs:
+  use-global:
+    uses: buildiverse/.github/.github/workflows/hello.yml@main
