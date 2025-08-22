@@ -1,9 +1,14 @@
-name: Caller Workflow
+name: hello (caller)
 
 on:
-  push:
-    branches: [ main ]   # run only when pushing to main
+  push:                     # triggers on push to any branch; tighten later if you want
+    branches:
+      - "**"
+  workflow_dispatch:        # lets you run it manually from the Actions tab
 
 jobs:
-  use-global:
-    uses: buildiverse/.github/.github/workflows/hello.yml@main
+  call-reusable:
+    uses: buildiverse/.github/.github/workflows/hello-reusable.yml@main
+    with:
+      who: "from-${{ github.repository }}"
+    secrets: inherit        # passes the caller repo's secrets down (handy later for CD)
