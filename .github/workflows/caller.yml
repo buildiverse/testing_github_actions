@@ -1,14 +1,16 @@
-name: hello (caller)
+name: repo-ci
 
 on:
-  push:                     # triggers on push to any branch; tighten later if you want
-    branches:
-      - "**"
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}  # allow manual trigger
+
+permissions: read-all
 
 jobs:
-  call-reusable:
-    uses: buildiverse/.github/.github/workflows/hello-reusable.yml@main
+  use-org-reusable:
+    uses: buildiverse/.github/.github/workflows/org-hello.yml@main
     with:
-      who: "from-${{ github.repository }}"
-    secrets: inherit        # passes the caller repo's secrets down (handy later for CD)
+      greet: "hello from ${{ github.repository }}"
+      environment: "demo"
+    secrets: inherit
