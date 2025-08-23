@@ -9,8 +9,5 @@ permissions: read-all
 
 jobs:
   use-org-reusable:
-    uses: buildiverse/.github/.github/workflows/org-hello.yml@main
-    with:
-      greet: "hello from ${{ github.repository }}"
-      environment: "demo"
+    uses: buildiverse/.github/.github/workflows/hello.yml@main
     secrets: inherit
