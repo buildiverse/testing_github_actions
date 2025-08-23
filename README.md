@@ -1,9 +1,5 @@
 # testing_github_actions
 
-#  test out my workfflow in the github buildverse community
+fix the branch in the workflows let's test it out now
 
-
-## check now my global workflow trigger or not
-
-
-### now all the permission enable check 
+workflow updated now it will run dummy check like lint , format, test

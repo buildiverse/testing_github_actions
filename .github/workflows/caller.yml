@@ -1,13 +1,38 @@
-name: repo-ci
+name: Global CI/CD
 
 on:
+  pull_request:
+    branches: [main, dev]
   push:
-    branches: [ main ]
-  workflow_dispatch: {}  # allow manual trigger
-
-permissions: read-all
 
 jobs:
-  use-org-reusable:
-    uses: buildiverse/.github/.github/workflows/hello.yml@main
-    secrets: inherit
+  pr-guard:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    uses: Gurnav224/.github/.github/workflows/pr-guard.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+
+  prettier:
+    if: github.event_name == 'pull_request' && github.base_ref == 'dev'
+    uses: Gurnav224/.github/.github/workflows/prettier.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+
+  ruff:
+    if: github.event_name == 'pull_request' && github.base_ref == 'dev'
+    uses: Gurnav224/.github/.github/workflows/ruff.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+
+  security:
+    uses: Gurnav224/.github/.github/workflows/security.yml@main
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    with:
+      base_ref: ${{ github.event.pull_request.base.ref != '' && github.event.pull_request.base.ref || github.ref_name }}
+      head_ref: ${{ github.event.pull_request.head.ref != '' && github.event.pull_request.head.ref || github.sha }}

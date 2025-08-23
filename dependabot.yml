@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions" # Set to your project's ecosystem, e.g., "npm", "pip", "github-actions", etc.
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
