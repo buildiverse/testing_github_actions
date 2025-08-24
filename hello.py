@@ -1,18 +1,9 @@
 
 
-print('Hello, World!')
+num = int(input("Enter a number: "))
 
-print('welcome to test the ci and cd')
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
 
-
-print('this is the test branch do not merge it directly to main')
-
-print('how it works in the test branch')
-
-print('add the changes')
-
-print('remove the permissions from the global CI/CD workflow')
-
-print('add the permissions to each job in the CI/CD workflow')
-
-print('now the pr checks should work as expected')
