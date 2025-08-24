@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running local pre-push CI/CD simulation..."
+
+# Run Prettier
+echo "✨ Running Prettier..."
+npm run format:check
+if [ $? -ne 0 ]; then
+  echo "❌ Prettier issues found!"
+  exit 1
+fi
+
+# Run Ruff
+echo "🐍 Running Ruff..."
+ruff check .
+if [ $? -ne 0 ]; then
+  echo "❌ Ruff issues found!"
+  exit 1
+fi
+
+echo "✅ All local pre-push checks passed!"
